@@ -36,7 +36,7 @@ public class MainCityActivity extends AppCompatActivity
 
     }
 
-    public void weatherDetailsclick(View v){
+    public void weatherDetailsclick(View view){
         Intent iIntend = new Intent(MainCityActivity.this,WeatherListActivity.class);
         startActivity(iIntend);
     }
@@ -46,29 +46,33 @@ public class MainCityActivity extends AppCompatActivity
 
         try {
             JSONObject Data = new JSONObject(JsonData);
-            JSONObject cityObject= Data.getJSONObject("city");
+            JSONObject cityObject = Data.getJSONObject("city");
             cityName.setText(cityObject.getString("name"));
 
-            JSONObject cityCoordObject= cityObject.getJSONObject("coord");
-            cityLong.setText("Longitude: "+cityCoordObject.getString("long"));
+            JSONObject cityCoordObject = cityObject.getJSONObject("coord");
+            cityLong.setText("Longitude: "+cityCoordObject.getString("lon"));
+
+
             cityLat.setText("Latitude: "+cityCoordObject.getString("lat"));
 
+
             cityCode.setText("Country: "+cityObject.getString("country"));
+
+
+
             cityPopulation.setText("Population: "+cityObject.getString("population"));
 
-            JSONArray wList = Data.getJSONArray("list");
-            for(int y2 = 0; y2 < wList.length(); y2++){
-                JSONObject weatherDetail = wList.getJSONObject(y2);
-                String weatherdate = weatherDetail.getString("dt");
+            JSONArray List = Data.getJSONArray("list");
+            for(int i = 0; i < List.length(); i++){
+                JSONObject weatherDetail = List.getJSONObject(i);
 
-
-                String weatherDate = weatherDetail.getString("dt");
-                String weatherpressure = weatherDetail.getString("pressure");
-                String weatherhumidity = weatherDetail.getString("humidity");
-                String weatherspeed = weatherDetail.getString("speed");
-                String weatherdeg = weatherDetail.getString("degree");
-                String weatherclouds = weatherDetail.getString("cloudy");
-                String weatherrain = weatherDetail.getString("rainy");
+                String Date = weatherDetail.getString("date");
+                String pressure = weatherDetail.getString("pressure");
+                String humidity = weatherDetail.getString("humidity");
+                String speed = weatherDetail.getString("speed");
+                String degree = weatherDetail.getString("degree");
+                String clouds = weatherDetail.getString("cloudy");
+                String rain = weatherDetail.getString("rainy");
 
 //                weatherclassArray.add(new weatherList())
             }
